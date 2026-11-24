@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Phiếu đánh giá – tab Hồ sơ y tế</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F4}
+a{color:#0E6E66}a:hover{color:#0A524C}
+button,input,select,textarea{font-family:inherit}
+</style>
+<link rel="stylesheet" href="assets/proto.css">
+<script src="assets/proto.js" defer></script>
+</head>
+<body data-page="HoSoYTe">
+<div style="font-family: Inter, system-ui, sans-serif; color: #1F2A2E; min-height: 100vh; background: #F5F6F4">
+<header style="background: #FFFFFF; border-bottom: 1px solid #E1E4E0">
+<div style="max-width: 1120px; margin: 0 auto; padding: 14px 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 10px 20px">
+<span style="font-weight: 700; letter-spacing: 0.08em; color: #0E6E66">KAZOKU</span>
+<a href="DanhSach.html?role=bs" style="font-size: 14px; font-weight: 600; text-decoration: none">‹ Danh sách</a><span style="font-size: 14px; color: #5B666A">Phiếu đánh giá chuyên môn</span>
+<span style="margin-left: auto; font-size: 14px; color: #5B666A">BS Minh · Chi nhánh Đống Đa</span>
+</div>
+</header>
+<main style="max-width: 1120px; margin: 0 auto; padding: 20px 24px 40px; display: flex; flex-direction: column; gap: 16px">
+<section style="background: #FFFFFF; border: 1px solid #E1E4E0; border-radius: 14px; padding: 18px 22px; display: flex; flex-wrap: wrap; gap: 12px 28px; align-items: center">
+<div style="display: flex; flex-direction: column; gap: 4px; min-width: 240px"><span style="font-size: 19px; font-weight: 600">Nguyễn Văn An · 78 · Nam</span><span style="font-size: 14px; color: rgb(91, 102, 106)">HS-0231 · BHYT HT2 79 xxx xxx 0231</span></div>
+<span style="padding: 3px 10px; border-radius: 6px; background: #E8EEF7; color: #26406B; font-size: 13px; font-weight: 600">LƯU TRÚ</span>
+
+<span style="font-size: 14px; color: #5B666A">Người nhà: Nguyễn Thị Hà (con) · 0912 345 678</span>
+</section>
+<nav aria-label="Phần của phiếu" style="display: flex; flex-wrap: wrap; gap: 6px; border-bottom: 1px solid #D5DAD6">
+<a href="HoSoYTe.html" aria-current="page" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; font-size: 16px; font-weight: 600; color: #0A524C; text-decoration: none; border-bottom: 3px solid #0E6E66">Hồ sơ y tế</a>
+<a href="Main.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; font-size: 16px; font-weight: 500; color: #5B666A; text-decoration: none; border-bottom: 3px solid transparent">Y tá <span style="font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 999px; background: rgb(227, 242, 239); color: rgb(10, 82, 76)">Hoàn tất 09:12</span></a>
+<a href="BacSi.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; font-size: 16px; font-weight: 500; color: #5B666A; text-decoration: none; border-bottom: 3px solid transparent">Bác sĩ – Khám</a>
+<a href="ChiDinh.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; font-size: 16px; font-weight: 500; color: #5B666A; text-decoration: none; border-bottom: 3px solid transparent">Chỉ định </a>
+<a href="KetLuan.html" style="display: inline-flex; align-items: center; gap: 8px; min-height: 48px; padding: 0 18px; font-size: 16px; font-weight: 500; color: #5B666A; text-decoration: none; border-bottom: 3px solid transparent">Kết luận</a>
+</nav>
+<section style="background: #FFFFFF; border: 1px solid #E1E4E0; border-radius: 14px; padding: 20px 22px; display: flex; flex-direction: column; gap: 16px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 12px">
+<div><h2 style="margin: 0 0 4px; font-size: 18px">Hồ sơ y tế</h2><p style="margin: 0; font-size: 14px; color: #5B666A">Bản PDF giấy tờ bệnh án của người cao tuổi. Tiếp tân tải lên lúc tiếp nhận; y tá, bác sĩ xem và tải thêm khi có giấy tờ mới.</p></div>
+<div style="display: flex; flex-direction: column; align-items: flex-end; gap: 4px"><button type="button" style="min-height: 44px; padding: 0 18px; border: 0; border-radius: 8px; background: #0E6E66; color: #FFFFFF; font-size: 15px; font-weight: 600; cursor: pointer">+ Tải lên PDF</button><span style="font-size: 12px; color: #5B666A">Chỉ nhận tệp PDF, tối đa 20 MB/tệp</span></div>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 8px; align-items: center">
+<label style="display: flex; align-items: center; gap: 8px; height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; flex: 1 1 240px; max-width: 360px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5B666A" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg><input placeholder="Tìm theo tên giấy tờ, nơi cấp" aria-label="Tìm hồ sơ" style="border: 0; outline: none; flex: 1 1 auto; font-size: 14px"></label>
+<select aria-label="Loại giấy tờ" style="height: 40px; border: 1px solid #C9CFCB; border-radius: 8px; padding: 0 10px; font-size: 14px; background: #FFFFFF"><option>Tất cả loại giấy tờ</option><option>Giấy ra viện</option><option>Đơn thuốc</option><option>Xét nghiệm</option><option>Chẩn đoán hình ảnh</option><option>Khác</option></select>
+<span style="font-size: 13px; color: #5B666A">4 tệp</span>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<div style="flex: 1 1 340px; min-width: 0; display: flex; flex-direction: column; gap: 10px">
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 2px solid #0E6E66; border-radius: 10px; background: #F2F8F7">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 14h6"></path><path d="M9 17h4"></path></svg>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">Giấy ra viện</span><span style="font-size: 13px; color: #3A4549">BV Bạch Mai · 12/03/2026</span><span style="font-size: 12px; color: #5B666A">2 trang · 1,4 MB · tải lên bởi Lan (tiếp tân) · 23/11 08:24</span></div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end"><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #0A524C; font-size: 14px; font-weight: 600; cursor: pointer">Xem</button><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #3A4549; font-size: 14px; cursor: pointer">Tải về</button><button type="button" aria-label="Xoá tệp" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #E1E4E0; border-radius: 8px; background: #FFFFFF; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid #E1E4E0; border-radius: 10px; background: #FFFFFF">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 14h6"></path><path d="M9 17h4"></path></svg>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">Đơn thuốc</span><span style="font-size: 13px; color: #3A4549">PK Đa khoa Đống Đa · 02/05/2026</span><span style="font-size: 12px; color: #5B666A">1 trang · 0,6 MB · tải lên bởi Lan (tiếp tân) · 23/11 08:24</span></div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end"><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #0A524C; font-size: 14px; font-weight: 600; cursor: pointer">Xem</button><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #3A4549; font-size: 14px; cursor: pointer">Tải về</button><button type="button" aria-label="Xoá tệp" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #E1E4E0; border-radius: 8px; background: #FFFFFF; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid #E1E4E0; border-radius: 10px; background: #FFFFFF">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 14h6"></path><path d="M9 17h4"></path></svg>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">Xét nghiệm máu</span><span style="font-size: 13px; color: #3A4549">BV Bạch Mai · 08/03/2026</span><span style="font-size: 12px; color: #5B666A">1 trang · 0,8 MB · tải lên bởi Lan (tiếp tân) · 23/11 08:25</span></div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end"><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #0A524C; font-size: 14px; font-weight: 600; cursor: pointer">Xem</button><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #3A4549; font-size: 14px; cursor: pointer">Tải về</button><button type="button" aria-label="Xoá tệp" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #E1E4E0; border-radius: 8px; background: #FFFFFF; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button></div>
+</div>
+<div style="display: flex; gap: 12px; align-items: flex-start; padding: 12px 14px; border: 1px solid #E1E4E0; border-radius: 10px; background: #FFFFFF">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"></path><path d="M14 3v5h5"></path><path d="M9 14h6"></path><path d="M9 17h4"></path></svg>
+<div style="flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px"><span style="font-size: 15px; font-weight: 600">X-quang ngực – kết quả đọc</span><span style="font-size: 13px; color: #3A4549">BV Bạch Mai · 10/03/2026</span><span style="font-size: 12px; color: #5B666A">1 trang · 0,5 MB · tải lên bởi Y tá Hoa · 23/11 08:52</span></div>
+<div style="display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end"><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #0A524C; font-size: 14px; font-weight: 600; cursor: pointer">Xem</button><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #3A4549; font-size: 14px; cursor: pointer">Tải về</button><button type="button" aria-label="Xoá tệp" style="width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid #E1E4E0; border-radius: 8px; background: #FFFFFF; cursor: pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#B42318" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6h18"></path><path d="M8 6V4h8v2"></path><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path></svg></button></div>
+</div>
+</div>
+<div style="flex: 2 1 460px; min-width: 0; border: 1px solid #E1E4E0; border-radius: 12px; overflow: hidden">
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 8px; padding: 10px 14px; background: #F7F9F8; border-bottom: 1px solid #E1E4E0"><span style="font-size: 14px; font-weight: 600">Giấy ra viện · BV Bạch Mai</span><span style="margin-left: auto; font-size: 13px; color: #5B666A">Trang 1/2</span><button type="button" aria-label="Trang trước" style="width: 40px; height: 40px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; cursor: pointer">‹</button><button type="button" aria-label="Trang sau" style="width: 40px; height: 40px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; cursor: pointer">›</button><button type="button" style="min-height: 40px; padding: 0 12px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; font-size: 14px; cursor: pointer">Mở toàn màn hình</button></div>
+<div style="background: #EEF0ED; padding: 24px; display: flex; justify-content: center">
+<div style="width: 100%; max-width: 460px; aspect-ratio: 1 / 1.414; background: #FFFFFF; box-shadow: 0 1px 3px rgba(0,0,0,0.12); padding: 32px 28px; box-sizing: border-box; display: flex; flex-direction: column; gap: 10px">
+<div style="height: 12px; width: 50%; border-radius: 4px; background: #CDD3CF; align-self: center"></div><div style="height: 8px; width: 30%; border-radius: 4px; background: #E6E8E5; align-self: center; margin-bottom: 12px"></div>
+<div style="height: 8px; width: 60%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 90%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 85%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 92%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 70%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 88%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 95%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 40%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 80%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 90%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 75%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 86%; border-radius: 4px; background: #E6E8E5"></div><div style="height: 8px; width: 65%; border-radius: 4px; background: #E6E8E5"></div>
+<span style="margin-top: auto; align-self: center; font-size: 12px; color: #8A9396">Xem trước tệp PDF</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+</main>
+</div>
+</body>
+</html>

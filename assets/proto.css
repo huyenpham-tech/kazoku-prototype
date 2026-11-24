@@ -1,0 +1,46 @@
+/* Kazoku prototype – shared overlay styles (toast, modal, prototype bar).
+   Colours follow the screens: teal #0E6E66, ink #1F2A2E, muted #5B666A, line #E1E4E0. */
+
+.kz-toast-wrap{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:1000;display:flex;flex-direction:column;gap:8px;align-items:center;pointer-events:none;width:min(560px,calc(100% - 32px))}
+.kz-toast{pointer-events:auto;display:flex;align-items:flex-start;gap:10px;width:100%;box-sizing:border-box;padding:12px 16px;border-radius:10px;background:#1F2A2E;color:#FFFFFF;font:500 14px/1.45 Inter,system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.18);animation:kz-in .18s ease-out}
+.kz-toast.ok{background:#0A524C}
+.kz-toast.warn{background:#7A5300}
+.kz-toast.err{background:#8A1C12}
+.kz-toast svg{flex:0 0 auto;margin-top:1px}
+@keyframes kz-in{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+.kz-backdrop{position:fixed;inset:0;z-index:900;background:rgba(31,42,46,.45);display:flex;align-items:center;justify-content:center;padding:16px}
+.kz-modal{width:min(520px,100%);max-height:calc(100vh - 32px);overflow:auto;background:#FFFFFF;border-radius:14px;box-shadow:0 12px 40px rgba(0,0,0,.25);font-family:Inter,system-ui,sans-serif;color:#1F2A2E;animation:kz-in .18s ease-out}
+.kz-modal.wide{width:min(820px,100%)}
+.kz-modal-h{display:flex;align-items:center;gap:10px;padding:18px 22px 6px}
+.kz-modal-h h2{margin:0;font-size:18px}
+.kz-modal-b{padding:6px 22px 4px;font-size:15px;line-height:1.55;color:#3A4549}
+.kz-modal-b p{margin:0 0 10px}
+.kz-modal-b dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:6px 0 12px;font-size:14px}
+.kz-modal-b dt{color:#5B666A}
+.kz-modal-b dd{margin:0;font-weight:600;color:#1F2A2E}
+.kz-modal-f{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;padding:16px 22px 20px}
+.kz-btn{min-height:44px;padding:0 18px;border-radius:8px;font:600 15px Inter,system-ui,sans-serif;cursor:pointer;border:1px solid #C9CFCB;background:#FFFFFF;color:#1F2A2E}
+.kz-btn.primary{border-color:#0E6E66;background:#0E6E66;color:#FFFFFF}
+.kz-btn.danger{border-color:#B42318;background:#B42318;color:#FFFFFF}
+.kz-btn:focus-visible,.kz-bar a:focus-visible,.kz-bar select:focus-visible{outline:3px solid #7FC4BC;outline-offset:2px}
+
+.kz-pdf{background:#EEF0ED;border-radius:10px;padding:20px;display:flex;justify-content:center}
+.kz-pdf-page{width:100%;max-width:420px;aspect-ratio:1/1.414;background:#FFFFFF;box-shadow:0 1px 3px rgba(0,0,0,.12);padding:28px 24px;box-sizing:border-box;display:flex;flex-direction:column;gap:10px}
+.kz-pdf-page i{display:block;height:9px;border-radius:4px;background:#E1E4E0}
+
+/* Prototype bar – fixed, bottom-left, out of the way of the forms */
+.kz-bar{position:fixed;left:16px;bottom:16px;z-index:800;display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;max-width:calc(100% - 32px);box-sizing:border-box;padding:8px 12px;border-radius:12px;background:#1F2A2E;color:#FFFFFF;font:500 13px Inter,system-ui,sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.2)}
+.kz-bar b{font-weight:700;letter-spacing:.06em;color:#9ED8D0}
+.kz-bar a{color:#FFFFFF;text-decoration:underline;text-underline-offset:3px}
+.kz-bar label{display:flex;align-items:center;gap:6px}
+.kz-bar select{height:34px;border-radius:8px;border:1px solid #5B666A;background:#2C3A3F;color:#FFFFFF;padding:0 8px;font:500 13px Inter,system-ui,sans-serif}
+.kz-bar button{height:34px;width:34px;border:0;border-radius:8px;background:transparent;color:#C9CFCB;cursor:pointer;font-size:16px}
+
+.kz-hidden{display:none !important}
+.kz-banner{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:12px;font-size:14px;font-weight:500}
+.kz-banner.info{background:#E8EEF7;color:#26406B}
+.kz-banner.warn{background:#FFF4D6;color:#7A5300}
+.kz-locked input,.kz-locked textarea,.kz-locked select{pointer-events:none;background:#F7F9F8 !important;color:#3A4549}
+.kz-locked label{cursor:default !important}
+.kz-field-err{border-color:#B42318 !important;box-shadow:0 0 0 3px rgba(180,35,24,.15)}

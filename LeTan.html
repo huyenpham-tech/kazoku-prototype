@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>MH-01 Lễ tân – Check-in lịch đánh giá</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F4}
+a{color:#0E6E66}a:hover{color:#0A524C}
+button{font-family:inherit;cursor:pointer}
+input{font-family:inherit}
+@media (max-width: 960px){.rt-wrap{min-width:0 !important}.rt{grid-template-columns:minmax(0,1fr) minmax(0,1fr) !important;row-gap:8px !important}.rt-head{display:none !important}}
+</style>
+<link rel="stylesheet" href="assets/proto.css">
+<script src="assets/proto.js" defer></script>
+</head>
+<body data-page="LeTan">
+<div style="min-height: 860px; font-family: Inter, system-ui, sans-serif; color: #1C2629; background: #F5F6F4">
+<header style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 14px clamp(16px, 3vw, 32px); background: #FFFFFF; border-bottom: 1px solid #E1E4E0">
+<div style="display: flex; align-items: center; gap: 20px">
+<span style="font-weight: 700; font-size: 18px; letter-spacing: 0.5px; color: #0E6E66">KAZOKU</span>
+<span style="font-size: 14px; color: #5B666A">Tiếp nhận <span aria-hidden="true">›</span> <span style="color: #1C2629; font-weight: 600">Lịch đánh giá hôm nay</span></span>
+</div>
+<span style="font-size: 14px; color: #5B666A">Lan · Tiếp tân</span>
+</header>
+
+<main style="max-width: 1216px; margin: 0 auto; padding: 28px clamp(16px, 3vw, 32px) 40px">
+<div style="display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 16px; margin-bottom: 20px">
+<div>
+<h1 style="margin: 0 0 4px; font-size: 26px; font-weight: 700">Check-in đánh giá chuyên môn</h1>
+<p style="margin: 0; font-size: 14px; color: #5B666A">Thứ Hai, 23/11/2026&nbsp;</p>
+</div>
+<label style="display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #5B666A">Tìm hồ sơ
+<input type="search" placeholder="Tên, số điện thoại, mã hồ sơ" style="width: 300px; max-width: 100%; height: 44px; box-sizing: border-box; padding: 0 14px; border: 1px solid #C9CFCB; border-radius: 8px; font-size: 15px; background: #FFFFFF"></label>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 12px; margin-bottom: 20px">
+<div style="background: #FFFFFF; border: 1px solid #E1E4E0; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B666A">Lịch hôm nay</div><div style="font-size: 26px; font-weight: 700; margin-top: 2px">6</div></div>
+<div style="background: #FFFFFF; border: 1px solid #E1E4E0; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B666A">Đã đến</div><div style="font-size: 26px; font-weight: 700; margin-top: 2px; color: #0E6E66">1</div></div>
+<div style="background: #FFFFFF; border: 1px solid #E1E4E0; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #5B666A">Chờ đến</div><div style="font-size: 26px; font-weight: 700; margin-top: 2px">3</div></div>
+<div style="background: #FFF7EB; border: 1px solid #F1D9B0; border-radius: 10px; padding: 14px 16px"><div style="font-size: 13px; color: #7A4A00">Cần xử lý</div><div style="font-size: 26px; font-weight: 700; margin-top: 2px; color: #9A5B00">2</div></div>
+</div>
+
+<div style="background: #FFFFFF; border: 1px solid #E1E4E0; border-radius: 12px; overflow-x: auto">
+<div class="rt-wrap" style="min-width: 900px">
+<div class="rt rt-head" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; padding: 12px 20px; font-size: 12px; font-weight: 600; letter-spacing: 0.4px; text-transform: uppercase; color: #5B666A; border-bottom: 1px solid #E1E4E0">
+<span>Giờ hẹn</span><span>Người cao tuổi</span><span>Dịch vụ</span><span>Y tá / Bác sĩ</span><span>Trạng thái</span><span style="text-align: right">Thao tác</span>
+</div>
+
+<div class="rt" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0ED; background: #FFFFFF">
+<span style="font-size: 16px; font-weight: 600">08:30</span>
+<div><div style="font-size: 15px; font-weight: 600">Nguyễn Văn An, 78</div><div style="font-size: 13px; color: #5B666A; margin-top: 2px">HS-0231 · con: Nguyễn Thị Hà</div></div>
+<span style="font-size: 14px">Lưu trú</span>
+<span style="font-size: 14px; color: #3A4549">Y tá Hoa · BS Minh</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #E3F2EF; color: #0A524C"><span aria-hidden="true">●</span>Đã đến 08:24</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+
+
+
+<span style="font-size: 13px; color: #5B666A">Y tá đang đánh giá</span>
+
+</div>
+</div>
+
+<div class="rt" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0ED; background: #FFFFFF">
+<span style="font-size: 16px; font-weight: 600">09:00</span>
+<div><div style="font-size: 15px; font-weight: 600">Trần Thị Bình, 82</div><div style="font-size: 13px; color: #5B666A; margin-top: 2px">HS-0232 · con: Bình · 0912 345 678</div></div>
+<span style="font-size: 14px">Bán trú</span>
+<span style="font-size: 14px; color: #3A4549">Y tá Hoa · BS Minh</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #EEF0ED; color: #3A4549"><span aria-hidden="true">○</span>Chờ đến</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+
+<button type="button" style="height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: #0E6E66; color: #FFFFFF; font-size: 14px; font-weight: 600">Check-in</button>
+
+
+<button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #1C2629; font-size: 14px; font-weight: 500">Liên hệ</button>
+
+
+</div>
+</div>
+
+<div class="rt" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0ED; background: #FFFBF4">
+<span style="font-size: 16px; font-weight: 600">09:30</span>
+<div><div style="font-size: 15px; font-weight: 600">Lê Văn Cường, 71</div><div style="font-size: 13px; color: #5B666A; margin-top: 2px">HS-0233 · đã gọi 09:40</div></div>
+<span style="font-size: 14px">Tại nhà</span>
+<span style="font-size: 14px; color: #3A4549">Y tá Mai · BS Minh</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #FFF1DB; color: #7A4A00"><span aria-hidden="true">◐</span>Muộn</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+
+<button type="button" style="height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: #0E6E66; color: #FFFFFF; font-size: 14px; font-weight: 600">Check-in</button>
+
+
+<button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #1C2629; font-size: 14px; font-weight: 500">Liên hệ</button>
+
+
+</div>
+</div>
+
+<div class="rt" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0ED; background: #FFFBF4">
+<span style="font-size: 16px; font-weight: 600">10:00</span>
+<div><div style="font-size: 15px; font-weight: 600">Phạm Thị Dung, 85</div><div style="font-size: 13px; color: #5B666A; margin-top: 2px">HS-0234 · đã gọi 2 lần</div></div>
+<span style="font-size: 14px">Lưu trú</span>
+<span style="font-size: 14px; color: #3A4549">Y tá Mai · BS Lan</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #FDE8E6; color: #9B1C12"><span aria-hidden="true">✕</span>Chưa liên lạc được</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+
+
+<button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #1C2629; font-size: 14px; font-weight: 500">Liên hệ</button>
+
+
+</div>
+</div>
+
+<div class="rt" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0ED; background: #FFFFFF">
+<span style="font-size: 16px; font-weight: 600">10:30</span>
+<div><div style="font-size: 15px; font-weight: 600">Hoàng Văn Em, 90</div><div style="font-size: 13px; color: #5B666A; margin-top: 2px">HS-0235 · gia đình xin dời</div></div>
+<span style="font-size: 14px">Lưu trú</span>
+<span style="font-size: 14px; color: #3A4549">Y tá Hoa · BS Lan</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #EEF0ED; color: #3A4549"><span aria-hidden="true">↺</span>Cần hẹn lại</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+
+
+
+<span style="font-size: 13px; color: #5B666A">Đã chuyển hẹn lại</span>
+
+</div>
+</div>
+
+<div class="rt" style="display: grid; grid-template-columns: 80px minmax(0, 2.2fr) 110px minmax(0, 1.6fr) 180px 220px; gap: 16px; align-items: center; padding: 14px 20px; border-bottom: 1px solid #EEF0ED; background: #FFFFFF">
+<span style="font-size: 16px; font-weight: 600">11:00</span>
+<div><div style="font-size: 15px; font-weight: 600">Đỗ Thị Giang, 76</div><div style="font-size: 13px; color: #5B666A; margin-top: 2px">HS-0236 · cháu: Tuấn · 0987 …</div></div>
+<span style="font-size: 14px">Bán trú</span>
+<span style="font-size: 14px; color: #3A4549">Y tá Mai · BS Lan</span>
+<span style="display: inline-flex; align-items: center; gap: 6px; justify-self: start; padding: 4px 10px; border-radius: 999px; font-size: 13px; font-weight: 600; background: #EEF0ED; color: #3A4549"><span aria-hidden="true">○</span>Chờ đến</span>
+<div style="display: flex; justify-content: flex-end; gap: 8px">
+
+<button type="button" style="height: 44px; padding: 0 16px; border: 0; border-radius: 8px; background: #0E6E66; color: #FFFFFF; font-size: 14px; font-weight: 600">Check-in</button>
+
+
+<button type="button" style="height: 44px; padding: 0 14px; border: 1px solid #C9CFCB; border-radius: 8px; background: #FFFFFF; color: #1C2629; font-size: 14px; font-weight: 500">Liên hệ</button>
+
+
+</div>
+</div>
+
+</div>
+</div>
+
+</main>
+
+
+
+
+</div>
+</body>
+</html>

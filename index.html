@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kazoku – Prototype đánh giá chuyên môn</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+body{margin:0;background:#F5F6F4;font-family:Inter,system-ui,sans-serif;color:#1F2A2E}
+a{color:#0E6E66}a:hover{color:#0A524C}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 24px 48px;display:flex;flex-direction:column;gap:24px}
+.card{background:#FFFFFF;border:1px solid #E1E4E0;border-radius:14px;padding:20px 22px}
+h1{margin:0;font-size:26px}
+h2{margin:0 0 4px;font-size:18px}
+.muted{color:#5B666A;font-size:14px;margin:0}
+.grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:14px}
+.subject{display:flex;flex-direction:column;gap:10px;padding:18px;border:1px solid #E1E4E0;border-radius:12px;background:#FFFFFF;text-decoration:none;color:inherit}
+.subject:hover{border-color:#0E6E66;background:#F2F8F7;color:inherit}
+.subject:focus-visible,.cta:focus-visible,.screens a:focus-visible{outline:3px solid #7FC4BC;outline-offset:2px}
+.tag{align-self:flex-start;padding:3px 10px;border-radius:6px;font-size:13px;font-weight:600}
+.cta{align-self:flex-start;display:inline-flex;align-items:center;min-height:44px;padding:0 18px;border-radius:8px;background:#0E6E66;color:#FFFFFF;font-size:15px;font-weight:600;text-decoration:none}
+.cta:hover{background:#0A524C;color:#FFFFFF}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:14px}
+.flow span.step{padding:6px 10px;border-radius:8px;background:#EEF0ED;font-weight:500}
+.flow span.arrow{color:#8A9396}
+.screens{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:8px 24px}
+.screens li{display:flex;flex-direction:column;gap:2px;padding:10px 0;border-bottom:1px solid #EEF0ED}
+.screens a{font-weight:600;font-size:15px}
+.screens small{color:#5B666A;font-size:13px}
+.sep{border:0;border-top:1px dashed #C9CFCB;margin:4px 0}
+</style>
+</head>
+<body>
+<header style="background:#FFFFFF;border-bottom:1px solid #E1E4E0">
+<div style="max-width:1120px;margin:0 auto;padding:14px 24px;display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px">
+<span style="font-weight:700;letter-spacing:.08em;color:#0E6E66">KAZOKU</span>
+<span style="font-size:14px;color:#5B666A">Prototype · Đánh giá chuyên môn người cao tuổi (UC-06)</span>
+</div>
+</header>
+<main class="wrap">
+<div>
+<h1>Mục lục prototype</h1>
+<p class="muted" style="margin-top:6px">Bản HTML sơ khai dựng từ thiết kế. Các màn y tá → bác sĩ được nối với nhau; màn Lễ tân chạy độc lập.</p>
+</div>
+
+<section class="card">
+<h2>Chọn đối tượng minh hoạ phiếu y tá</h2>
+<p class="muted" style="margin-bottom:14px">Mỗi loại dịch vụ có một phiếu y tá riêng (khác nhau ở mục 9 · Phần riêng). Chọn một người để đi hết luồng.</p>
+<div class="grid3">
+<a class="subject" href="Main.html?p=an">
+<span class="tag" style="background:#E8EEF7;color:#26406B">LƯU TRÚ</span>
+<span style="font-size:17px;font-weight:600">Nguyễn Văn An · 78 · Nam</span>
+<span class="muted">HS-0231 · Check-in 08:24 · Chờ đánh giá</span>
+<span class="muted">Phần riêng: thức giấc đêm, đi vệ sinh đêm, loại phòng.</span>
+<span style="font-size:14px;font-weight:600;color:#0A524C">Mở phiếu y tá ›</span>
+</a>
+<a class="subject" href="YTaBanTru.html?p=binh">
+<span class="tag" style="background:#F3ECDD;color:#6B4A12">BÁN TRÚ</span>
+<span style="font-size:17px;font-weight:600">Trần Thị Bình · 82 · Nữ</span>
+<span class="muted">HS-0232 · Check-in 08:50 · Chờ kết quả chuyên môn</span>
+<span class="muted">Phần riêng: đưa đón, lên xuống xe, nghỉ trưa, bữa ăn.</span>
+<span style="font-size:14px;font-weight:600;color:#0A524C">Mở phiếu y tá ›</span>
+</a>
+<a class="subject" href="YTaTaiNha.html?p=phuc">
+<span class="tag" style="background:#E3EFE6;color:#24563A">TẠI NHÀ</span>
+<span style="font-size:17px;font-weight:600">Đỗ Văn Phúc · 80 · Nam</span>
+<span class="muted">HS-0235 · Check-in 09:55 · Chờ đánh giá</span>
+<span class="muted">Phần riêng: loại nhà, lịch đến nhà, rủi ro an toàn.</span>
+<span style="font-size:14px;font-weight:600;color:#0A524C">Mở phiếu y tá ›</span>
+</a>
+</div>
+</section>
+
+<section class="card">
+<h2>Luồng được nối</h2>
+<div class="flow" style="margin:10px 0 16px">
+<span class="step">Danh sách (y tá)</span><span class="arrow" aria-hidden="true">→</span>
+<span class="step">Y tá · 1 trong 3 phiếu</span><span class="arrow" aria-hidden="true">→</span>
+<span class="step">Bác sĩ – Khám</span><span class="arrow" aria-hidden="true">→</span>
+<span class="step">Chỉ định</span><span class="arrow" aria-hidden="true">→</span>
+<span class="step">Kết luận</span><span class="arrow" aria-hidden="true">→</span>
+<span class="step">Danh sách (bác sĩ)</span>
+</div>
+<p class="muted">Nhánh phụ: ở Bác sĩ – Khám, mục 14 chọn “Có – cần kết quả trước” → hồ sơ sang <b>Chờ kết quả</b>; tab Hồ sơ y tế mở được từ mọi màn của phiếu.</p>
+<a class="cta" href="DanhSach.html" style="margin-top:14px">Bắt đầu từ Danh sách ›</a>
+</section>
+
+<section class="card">
+<h2>Tất cả màn</h2>
+<ul class="screens" style="margin-top:8px">
+<li><a href="DanhSach.html">Danh sách người cao tuổi · Y tá</a><small>Lọc theo trạng thái, dịch vụ, tìm tên</small></li>
+<li><a href="DanhSach.html?role=bs">Danh sách · Bác sĩ</a><small>Cùng danh sách, góc nhìn BS Minh</small></li>
+<li><a href="HoSoYTe.html?p=an">Tab Hồ sơ y tế</a><small>Xem, tải lên, tải về, xoá PDF</small></li>
+<li><a href="Main.html?p=an">Tab Y tá – Lưu trú</a><small>Phiếu đánh giá 10 mục</small></li>
+<li><a href="YTaBanTru.html?p=binh">Tab Y tá – Bán trú</a><small>Phiếu đánh giá 10 mục</small></li>
+<li><a href="YTaTaiNha.html?p=phuc">Tab Y tá – Tại nhà</a><small>Phiếu đánh giá 10 mục</small></li>
+<li><a href="BacSi.html?p=an">Tab Bác sĩ – Khám</a><small>Mục 11–14</small></li>
+<li><a href="ChiDinh.html?p=an">Tab Chỉ định</a><small>Mục 15 và yêu cầu chăm sóc tổng hợp</small></li>
+<li><a href="KetLuan.html?p=an">Tab Kết luận</a><small>Mục 16 · lưu kết luận</small></li>
+<li><a href="KetLuanCho.html?p=binh">Tab Kết luận – khi Chờ kết quả</a><small>Trạng thái chưa kết luận được</small></li>
+<li><a href="KetLuan.html?p=hung&amp;locked=1">Tab Kết luận – đã khoá (chỉ xem)</a><small>Màn thêm: phiếu sau 00:00 hôm sau</small></li>
+</ul>
+<hr class="sep" style="margin:16px 0">
+<ul class="screens">
+<li><a href="LeTan.html">MH-01 · Lễ tân – Check-in</a><small>Màn độc lập, không nối với luồng trên</small></li>
+</ul>
+</section>
+
+<section class="card" style="display:flex;flex-wrap:wrap;align-items:center;gap:12px">
+<p class="muted" style="flex:1 1 320px">Prototype ghi nhớ thao tác (đã chuyển bác sĩ, chờ kết quả, đã kết luận) trong trình duyệt. Bấm để quay về dữ liệu ban đầu.</p>
+<button type="button" id="reset" style="min-height:44px;padding:0 18px;border:1px solid #C9CFCB;border-radius:8px;background:#FFFFFF;font:600 15px Inter,system-ui,sans-serif;cursor:pointer">Đặt lại dữ liệu minh hoạ</button>
+<span id="reset-msg" role="status" class="muted"></span>
+</section>
+<script>
+document.getElementById('reset').addEventListener('click', function () {
+  try {
+    Object.keys(localStorage).filter(function (k) { return k.indexOf('kz_') === 0; })
+      .forEach(function (k) { localStorage.removeItem(k); });
+  } catch (e) {}
+  document.getElementById('reset-msg').textContent = 'Đã đặt lại.';
+});
+</script>
+</main>
+</body>
+</html>

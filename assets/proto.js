@@ -217,6 +217,65 @@
     document.title = document.title + ' · ' + P.name;
   }
 
+  function workflowChips() {
+    var nav = $('nav[aria-label="Phần của phiếu"]');
+    if (!nav) return;
+    var nurseDone = !!store.get('nurse_' + PKEY) || PKEY === 'an' || PKEY === 'binh';
+    var doctorDone = !!store.get('doctor_' + PKEY) || !!store.get('done_' + PKEY);
+    var planDone = !!store.get('plan_' + PKEY) || !!store.get('done_' + PKEY);
+    var states = {
+      nurse: nurseDone ? 'Hoàn tất' : 'Chưa điền',
+      doctor: doctorDone ? 'Hoàn tất' : nurseDone ? 'Chờ' : 'Chưa điền',
+      plan: planDone ? 'Hoàn tất' : doctorDone || PKEY === 'an' ? 'Chờ' : 'Chưa điền',
+      conclusion: store.get('done_' + PKEY) ? 'Hoàn tất' : isWaiting(PKEY) || planDone ? 'Chờ' : 'Chưa điền'
+    };
+    $$('a', nav).forEach(function (a) {
+      var path = a.getAttribute('href').split('?')[0], stage;
+      if (/^(Main|YTaBanTru|YTaTaiNha)\.html$/.test(path)) stage = 'nurse';
+      else if (path === 'BacSi.html') stage = 'doctor';
+      else if (path === 'ChiDinh.html') stage = 'plan';
+      else if (/^KetLuan(Cho)?\.html$/.test(path)) stage = 'conclusion';
+      if (!stage) return;
+      $$('span', a).forEach(function (chip) { chip.remove(); });
+      var chip = document.createElement('span');
+      chip.className = 'kz-step-chip';
+      chip.dataset.state = states[stage];
+      chip.textContent = states[stage];
+      a.appendChild(chip);
+    });
+  }
+
+  function doctorSourcePanel() {
+    var toggle = $('.kz-source-toggle');
+    if (!toggle) return;
+    var main = $('main');
+    toggle.addEventListener('click', function () {
+      var split = main.parentElement.classList.contains('kz-split') ? main.parentElement : null;
+      if (split) {
+        split.parentElement.insertBefore(main, split);
+        split.remove();
+        toggle.textContent = 'Xem tài liệu gốc ›';
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.focus();
+        return;
+      }
+      split = document.createElement('div');
+      split.className = 'kz-split';
+      main.parentElement.insertBefore(split, main);
+      split.appendChild(main);
+      var panel = document.createElement('aside');
+      panel.className = 'kz-source-panel';
+      panel.setAttribute('aria-label', 'Tài liệu gốc');
+      panel.innerHTML = '<div class="kz-source-head"><span>Tài liệu gốc</span><button type="button" aria-label="Đóng tài liệu gốc">Đóng ✕</button></div>' +
+        '<iframe title="Danh sách và bản xem tài liệu gốc" src="' + withP('HoSoYTe.html?embedded=1', PKEY) + '"></iframe>';
+      split.appendChild(panel);
+      toggle.textContent = 'Đóng tài liệu gốc ×';
+      toggle.setAttribute('aria-expanded', 'true');
+      $('button', panel).addEventListener('click', function () { toggle.click(); });
+      toggle.scrollIntoView({ block: 'nearest' });
+    });
+  }
+
   /* ------------------------------------------------------------------ nối link */
   function rewriteLinks() {
     var wait = isWaiting(PKEY);
@@ -361,13 +420,14 @@
     [yes, no].forEach(function (r) { r.addEventListener('change', function () { if (!yes.checked) setWaiting(PKEY, false); sync(); rewriteLinks(); }); });
 
     next.addEventListener('click', function (e) {
-      if (!yes.checked) return;
+      if (!yes.checked) { store.set('doctor_' + PKEY, now()); return; }
       e.preventDefault();
       modal({
         title: 'Chuyển hồ sơ sang “Chờ kết quả”?', icon: ICON.info, ok: 'Lưu & chờ kết quả',
         html: '<p>Phiếu của <b>' + esc(P.name) + '</b> được lưu, chưa kết luận. Hệ thống nhắc lại khi có kết quả tải lên tab Hồ sơ y tế.</p>'
       }).then(function (ok) {
         if (!ok) return;
+        store.set('doctor_' + PKEY, now());
         setWaiting(PKEY, true);
         flash('Đã lưu. Hồ sơ ' + P.name + ' đang chờ kết quả chuyên môn.', 'warn');
         go('KetLuanCho.html');
@@ -382,6 +442,8 @@
     $$('td').forEach(function (td) {
       if (/^Lưu trú: /.test(txt(td))) td.textContent = S.careRow;
     });
+    var next = $$('a').filter(function (a) { return /Tiếp: Kết luận/.test(txt(a)); })[0];
+    if (next) next.addEventListener('click', function () { store.set('plan_' + PKEY, now()); });
   }
 
   /* ------------------------------------------------------------------ màn Kết luận */
@@ -767,9 +829,11 @@
     if (PAGE !== 'DanhSach') {
       fillPatientCard();
       rewriteLinks();
+      workflowChips();
     }
+    if (params.get('embedded') === '1' && PAGE === 'HoSoYTe') document.body.classList.add('kz-embedded');
     if (NURSE_PAGES[PAGE]) nursePage();
-    if (PAGE === 'BacSi') doctorPage();
+    if (PAGE === 'BacSi') { doctorPage(); doctorSourcePanel(); }
     if (PAGE === 'ChiDinh') planPage();
     if (PAGE === 'KetLuan') conclusionPage();
     if (PAGE === 'KetLuanCho') waitingPage();

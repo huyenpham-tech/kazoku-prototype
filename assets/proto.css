@@ -44,3 +44,22 @@
 .kz-locked input,.kz-locked textarea,.kz-locked select{pointer-events:none;background:#F7F9F8 !important;color:#3A4549}
 .kz-locked label{cursor:default !important}
 .kz-field-err{border-color:#B42318 !important;box-shadow:0 0 0 3px rgba(180,35,24,.15)}
+
+/* Patient workflow chips and document controls */
+nav[aria-label="Phần của phiếu"] .kz-step-chip{display:inline-flex;align-items:center;white-space:nowrap;padding:3px 9px;border-radius:999px;font-size:12px;font-weight:600;line-height:1.4}
+.kz-step-chip[data-state="Hoàn tất"]{background:#E3F2EF;color:#0A524C}
+.kz-step-chip[data-state="Chờ"]{background:#FFF4D6;color:#7A5300}
+.kz-step-chip[data-state="Chưa điền"]{background:#EEF0ED;color:#5B666A}
+.kz-doc-actions{display:grid;grid-template-columns:max-content max-content;gap:6px;justify-content:end;flex:0 0 auto}
+.kz-doc-actions button[aria-label="Xoá tệp"]{grid-column:2;justify-self:end}
+.kz-source-toggle{padding:2px 0;border:0;background:transparent;color:#0A524C;text-decoration:underline;cursor:pointer;font:600 14px Inter,system-ui,sans-serif}
+.kz-source-toggle:focus-visible,.kz-doc-actions button:focus-visible{outline:3px solid #7FC4BC;outline-offset:2px}
+.kz-split{display:flex;gap:16px;align-items:flex-start;width:100%;max-width:1920px;margin:auto}
+.kz-split>main{flex:1 1 50%;min-width:0;max-width:none !important;margin:0 !important}
+.kz-source-panel{box-sizing:border-box;flex:1 1 50%;min-width:0;height:calc(100vh - 24px);position:sticky;top:12px;margin:12px 16px 12px 0;border:1px solid #C9CFCB;border-radius:14px;background:white;overflow:hidden;display:flex;flex-direction:column}
+.kz-source-head{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #E1E4E0;font-size:16px;font-weight:600}
+.kz-source-head button{border:1px solid #C9CFCB;border-radius:8px;background:white;padding:8px 12px;cursor:pointer;font:500 14px Inter,system-ui,sans-serif}
+.kz-source-panel iframe{border:0;width:100%;height:100%;min-height:0}
+body.kz-embedded header,body.kz-embedded main>section:first-of-type,body.kz-embedded main>nav,body.kz-embedded .kz-bar{display:none !important}
+body.kz-embedded main{padding:12px !important;gap:12px !important}
+@media(max-width:900px){.kz-split{display:block}.kz-split>main{width:100%}.kz-source-panel{position:fixed;z-index:850;inset:0;margin:0;width:100%;height:100dvh;border-radius:0}}

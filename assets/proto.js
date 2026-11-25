@@ -42,7 +42,7 @@
   // Dòng trong danh sách → màn mở ra (theo mã hồ sơ)
   var LIST_ROUTES = {
     'HS-0235': { key: 'phuc',  nurse: 'YTaTaiNha.html', doctor: 'BacSi.html' },
-    'HS-0233': { key: 'cuong', nurse: 'BacSi.html',     doctor: 'BacSi.html' },
+    'HS-0233': { key: 'cuong', nurse: 'YTaTaiNha.html',     doctor: 'BacSi.html' },
     'HS-0231': { key: 'an',    nurse: 'Main.html',      doctor: 'BacSi.html' },
     'HS-0232': { key: 'binh',  nurse: 'KetLuanCho.html', doctor: 'KetLuanCho.html' },
     'HS-0228': { key: 'em',    nurse: 'KetLuan.html',   doctor: 'KetLuan.html' },
@@ -386,7 +386,8 @@
 
   /* ------------------------------------------------------------------ màn Kết luận */
   function conclusionPage() {
-    var locked = params.get('locked') === '1' || !!P.lockNote;
+    var viewing = params.get('view') === '1';
+    var locked = params.get('locked') === '1' || !!P.lockNote || viewing;
     var save = $$('button').filter(function (b) { return txt(b) === 'Lưu kết luận'; })[0];
     var condLabel = $$('label').filter(function (l) { return /^Điều kiện cụ thể/.test(txt(l)); })[0];
     var reason = $$('label').filter(function (l) { return /^Lý do/.test(txt(l)); })[0];
@@ -396,7 +397,7 @@
     if (locked) {
       var b = document.createElement('div');
       b.className = 'kz-banner info';
-      b.innerHTML = ICON.lock + '<span>' + esc(P.lockNote || 'Phiếu đã khoá · chờ quản lý duyệt. Chỉ xem.') + '</span>';
+      b.innerHTML = (viewing && !P.lockNote ? ICON.info : ICON.lock) + '<span>' + esc(viewing && !P.lockNote ? 'Đang xem phiếu. Chọn Sửa trong danh sách để chỉnh nội dung.' : P.lockNote || 'Phiếu đã khoá · chờ quản lý duyệt. Chỉ xem.') + '</span>';
       nav.after(b);
       $('main').classList.add('kz-locked');
       $$('input, textarea, select').forEach(function (i) { i.disabled = true; });
@@ -570,8 +571,6 @@
     if (role === 'doctor') {
       var who = $('header span[style*="margin-left: auto"]');
       if (who) who.textContent = 'BS Minh · Bác sĩ · Chi nhánh Đống Đa';
-      var sub = $('main p');
-      if (sub) sub.textContent = 'Người đã check-in và phiếu y tá đã chuyển, xếp theo giờ đến.';
     }
     if (role === 'doctor') document.title = 'Danh sách người cao tuổi – Bác sĩ';
     var PILLS = {
@@ -605,6 +604,18 @@
         setStatus(row, 'Đã đánh giá', 'Kết luận ' + done + ' · tự khoá 00:00 ngày mai');
         target = 'KetLuan.html'; a.textContent = 'Sửa';
         a.setAttribute('style', a.getAttribute('style').replace('background: #0E6E66; color: #FFFFFF; border: 1px solid #0E6E66', 'background: #FFFFFF; color: #0A524C; border: 1px solid #C9CFCB'));
+        var actions = a.parentElement.classList.contains('row-actions') ? a.parentElement : document.createElement('div');
+        if (!actions.classList.contains('row-actions')) {
+          actions.className = 'row-actions';
+          actions.setAttribute('style', 'justify-self: end; display: flex; gap: 8px; white-space: nowrap');
+          a.parentElement.replaceChild(actions, a);
+          actions.appendChild(a);
+        }
+        if ($$('a', actions).length === 1) {
+          var view = a.cloneNode(true);
+          view.textContent = 'Xem';
+          actions.appendChild(view);
+        }
       } else if (/^KetLuan(Cho)?\.html$/.test(target)) {
         target = isWaiting(r.key) ? 'KetLuanCho.html' : 'KetLuan.html';
         if (!isWaiting(r.key) && /Chờ kết quả/.test(txt(row.children[3]))) setStatus(row, 'Chờ đánh giá', 'Đã có kết quả chuyên khoa');
@@ -615,14 +626,17 @@
         $$('span', row.children[3]).forEach(function (chip) {
           if (/^Y tá/.test(txt(chip))) { chip.textContent = 'Y tá ✓'; chip.style.background = 'rgb(227, 242, 239)'; chip.style.color = 'rgb(10, 82, 76)'; }
         });
-        if (role === 'nurse' && target === r.nurse && NURSE_PAGES[target.replace('.html', '')]) a.textContent = 'Xem';
+        if (role === 'nurse' && target === r.nurse && NURSE_PAGES[target.replace('.html', '')]) a.textContent = 'Tiếp tục';
       }
       a.setAttribute('href', withP(target, r.key));
+      var viewLink = $('.row-actions a:nth-child(2)', row);
+      if (viewLink) viewLink.setAttribute('href', withP('KetLuan.html?view=1', r.key));
       if (role === 'doctor' && /Đánh giá|Tiếp tục/.test(txt(a)) && r.doctor === 'BacSi.html') {
         // Bác sĩ chỉ khám khi y tá đã chuyển phiếu
         a.textContent = 'Khám';
       }
       a.addEventListener('click', function () { store.set('patient', r.key); });
+      if (viewLink) viewLink.addEventListener('click', function () { store.set('patient', r.key); });
     });
 
     // Lọc theo tab trạng thái, dịch vụ, ô tìm

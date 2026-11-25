@@ -779,6 +779,16 @@
 
   /* ------------------------------------------------------------------ màn Lễ tân (độc lập) */
   function receptionPage() {
+    $$('.rt').forEach(function (row) {
+      if (!row.children[2] || txt(row.children[2]) !== 'Tại nhà') return;
+      var checkin = $$('button', row).filter(function (b) { return txt(b) === 'Check-in'; })[0];
+      if (!checkin) return;
+      checkin.disabled = true;
+      checkin.title = 'Y tá phụ trách thực hiện check-in tại nhà';
+      checkin.style.background = '#EEF0ED';
+      checkin.style.color = '#8A9396';
+      checkin.style.cursor = 'not-allowed';
+    });
     var stats = $$('main > div:nth-of-type(2) > div');
     function stat(name) {
       var box = stats.filter(function (b) { return txt(b.firstElementChild) === name; })[0];
@@ -797,6 +807,7 @@
       var staff = txt(row.children[3]);
       var pill = row.children[4];
       if (txt(b) === 'Check-in') {
+        if (b.disabled || txt(row.children[2]) === 'Tại nhà') return;
         modal({
           title: 'Check-in cho ' + who + '?', icon: ICON.info, ok: 'Check-in',
           html: '<dl><dt>Dịch vụ</dt><dd>' + esc(txt(row.children[2])) + '</dd><dt>Phụ trách</dt><dd>' + esc(staff) + '</dd></dl>' +

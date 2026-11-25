@@ -217,34 +217,6 @@
     document.title = document.title + ' · ' + P.name;
   }
 
-  function workflowChips() {
-    var nav = $('nav[aria-label="Phần của phiếu"]');
-    if (!nav) return;
-    var nurseDone = !!store.get('nurse_' + PKEY);
-    var doctorDone = !!store.get('doctor_' + PKEY) || !!store.get('done_' + PKEY);
-    var planDone = !!store.get('plan_' + PKEY) || !!store.get('done_' + PKEY);
-    var states = {
-      nurse: nurseDone ? 'Hoàn tất' : 'Chưa điền',
-      doctor: doctorDone ? 'Hoàn tất' : 'Chưa điền',
-      plan: planDone ? 'Hoàn tất' : 'Chưa điền',
-      conclusion: store.get('done_' + PKEY) ? 'Hoàn tất' : isWaiting(PKEY) ? 'Chờ' : 'Chưa điền'
-    };
-    $$('a', nav).forEach(function (a) {
-      var path = a.getAttribute('href').split('?')[0], stage;
-      if (/^(Main|YTaBanTru|YTaTaiNha)\.html$/.test(path)) stage = 'nurse';
-      else if (path === 'BacSi.html') stage = 'doctor';
-      else if (path === 'ChiDinh.html') stage = 'plan';
-      else if (/^KetLuan(Cho)?\.html$/.test(path)) stage = 'conclusion';
-      if (!stage) return;
-      $$('span', a).forEach(function (chip) { chip.remove(); });
-      var chip = document.createElement('span');
-      chip.className = 'kz-step-chip';
-      chip.dataset.state = states[stage];
-      chip.textContent = states[stage];
-      a.appendChild(chip);
-    });
-  }
-
   function doctorSourcePanel() {
     var toggle = $('.kz-source-toggle');
     if (!toggle) return;
@@ -843,7 +815,6 @@
     if (PAGE !== 'DanhSach') {
       fillPatientCard();
       rewriteLinks();
-      workflowChips();
     }
     if (params.get('embedded') === '1' && PAGE === 'HoSoYTe') document.body.classList.add('kz-embedded');
     if (NURSE_PAGES[PAGE]) nursePage();

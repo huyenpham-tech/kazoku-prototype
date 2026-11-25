@@ -390,34 +390,14 @@
     var yes = radios.filter(function (r) { return /^Có/.test(txt(r.closest('label'))); })[0];
     var no = radios.filter(function (r) { return /^Không/.test(txt(r.closest('label'))); })[0];
     if (!next || !yes || !no) return;
-    var note = document.createElement('p');
-    note.className = 'kz-banner warn kz-hidden';
-    note.style.margin = '0';
-    note.innerHTML = ICON.warn + '<span>Hồ sơ sẽ chuyển sang “Chờ kết quả chuyên môn”. Kết luận sau khi có kết quả xét nghiệm chuyên khoa / khám chuyên sâu.</span>';
-    yes.closest('div').after(note);
-
-    function sync() {
-      var waiting = yes.checked;
-      note.classList.toggle('kz-hidden', !waiting);
-      next.textContent = waiting ? 'Lưu & chờ kết quả chuyên khoa' : 'Tiếp: Chỉ định ›';
+    if (store.get('specialist_requested_' + PKEY) === '1' || isWaiting(PKEY)) {
+      yes.checked = true; no.checked = false;
+      paintPill(yes); paintPill(no);
     }
-    if (isWaiting(PKEY)) { yes.checked = true; paintPill(yes); paintPill(no); }
-    sync();
-    [yes, no].forEach(function (r) { r.addEventListener('change', function () { if (!yes.checked) setWaiting(PKEY, false); sync(); rewriteLinks(); }); });
-
-    next.addEventListener('click', function (e) {
-      if (!yes.checked) { store.set('doctor_' + PKEY, now()); return; }
-      e.preventDefault();
-      modal({
-        title: 'Chuyển hồ sơ sang “Chờ kết quả”?', icon: ICON.info, ok: 'Lưu & chờ kết quả',
-        html: '<p>Phiếu của <b>' + esc(P.name) + '</b> được lưu, chưa kết luận. Hệ thống nhắc lại khi có kết quả tải lên tab Hồ sơ y tế.</p>'
-      }).then(function (ok) {
-        if (!ok) return;
-        store.set('doctor_' + PKEY, now());
-        setWaiting(PKEY, true);
-        flash('Đã lưu. Hồ sơ ' + P.name + ' đang chờ kết quả chuyên môn.', 'warn');
-        go('KetLuanCho.html');
-      });
+    next.addEventListener('click', function () {
+      store.set('specialist_requested_' + PKEY, yes.checked ? '1' : '0');
+      setWaiting(PKEY, false);
+      store.set('doctor_' + PKEY, now());
     });
   }
 
@@ -436,11 +416,24 @@
   function conclusionPage() {
     var viewing = params.get('view') === '1';
     var locked = params.get('locked') === '1' || !!P.lockNote || viewing;
-    var save = $$('button').filter(function (b) { return txt(b) === 'Lưu kết luận'; })[0];
+    var save = $('.kz-conclusion-save');
     var condLabel = $$('label').filter(function (l) { return /^Điều kiện cụ thể/.test(txt(l)); })[0];
     var reason = $$('label').filter(function (l) { return /^Lý do/.test(txt(l)); })[0];
     var kl = $$('input[name="kl"]');
+    var specialist = $$('input[name="specialist"]');
+    var specialistYes = specialist.filter(function (r) { return r.value === 'yes'; })[0];
+    var specialistNo = specialist.filter(function (r) { return r.value === 'no'; })[0];
+    var specialistNote = $('.kz-specialist-note');
+    var verdictFields = $('.kz-verdict-fields');
+    var careNote = $('.kz-care-note');
     var nav = $('nav');
+
+    if (specialistYes && specialistNo && store.get('specialist_requested_' + PKEY) === '1' && !store.get('done_' + PKEY)) {
+      specialistYes.checked = true;
+      specialistNo.checked = false;
+      paintPill(specialistYes); paintPill(specialistNo);
+    }
+    if (specialistNote && store.get('specialist_note_' + PKEY)) $('textarea', specialistNote).value = store.get('specialist_note_' + PKEY);
 
     if (locked) {
       var b = document.createElement('div');
@@ -456,13 +449,48 @@
     function syncCond() {
       var picked = kl.filter(function (r) { return r.checked; })[0];
       var conditional = picked && /có điều kiện/.test(txt(picked.closest('label')));
+      var rejected = picked && /^Không đáp ứng/.test(txt(picked.closest('label')));
+      var needsSpecialist = specialistYes && specialistYes.checked;
+      if (specialistNote) specialistNote.classList.toggle('kz-hidden', !needsSpecialist);
+      if (verdictFields) verdictFields.classList.toggle('kz-hidden', !!needsSpecialist);
       if (condLabel) condLabel.classList.toggle('kz-hidden', !conditional);
+      if (careNote) careNote.classList.toggle('kz-hidden', !!rejected);
+      if (save) save.textContent = needsSpecialist ? 'Lưu' : 'Lưu kết luận';
     }
-    kl.forEach(function (r) { r.addEventListener('change', syncCond); });
+    kl.forEach(function (r) { r.addEventListener('change', function () {
+      if (r.checked && /^Không đáp ứng/.test(txt(r.closest('label'))) && reason) {
+        var reasonTa = $('textarea', reason);
+        if (reasonTa && /^Bệnh nền ổn định; nhu cầu chăm sóc/.test(reasonTa.value)) reasonTa.value = '';
+      }
+      syncCond();
+    }); });
+    specialist.forEach(function (r) { r.addEventListener('change', syncCond); });
     syncCond();
 
     if (!save) return;
     save.addEventListener('click', function () {
+      if (specialistYes && specialistYes.checked) {
+        var noteTa = specialistNote && $('textarea', specialistNote);
+        var request = noteTa && noteTa.value.trim();
+        if (!request) {
+          if (noteTa) { noteTa.classList.add('kz-field-err'); noteTa.focus(); }
+          toast('Cần ghi rõ nội dung cần khám hoặc đánh giá.', 'err');
+          return;
+        }
+        noteTa.classList.remove('kz-field-err');
+        modal({ title: 'Lưu yêu cầu đánh giá chuyên môn?', icon: ICON.info, ok: 'Lưu',
+          html: '<p>Hồ sơ của <b>' + esc(P.name) + '</b> sẽ chờ kết quả: ' + esc(request) + '.</p>'
+        }).then(function (ok) {
+          if (!ok) return;
+          store.set('specialist_requested_' + PKEY, '1');
+          store.set('specialist_note_' + PKEY, request);
+          store.del('done_' + PKEY);
+          setWaiting(PKEY, true);
+          flash('Đã lưu yêu cầu đánh giá chuyên môn cho ' + P.name + '.', 'ok');
+          go('KetLuanCho.html');
+        });
+        return;
+      }
       var picked = kl.filter(function (r) { return r.checked; })[0];
       var cls = $$('input[name="cls"]').filter(function (r) { return r.checked; })[0];
       var reasonTa = reason && $('textarea', reason);
@@ -488,6 +516,7 @@
           '<p>Phiếu còn sửa được trong hôm nay. Từ 00:00 ngày mai phiếu tự khoá để quản lý duyệt.</p>'
       }).then(function (ok) {
         if (!ok) return;
+        store.set('specialist_requested_' + PKEY, '0');
         setWaiting(PKEY, false);
         store.set('done_' + PKEY, now());
         flash('Đã lưu kết luận “' + verdict + '” cho ' + P.name + '. Tự khoá lúc 00:00 ngày mai.', 'ok');
@@ -500,6 +529,14 @@
   function waitingPage() {
     var upd = $$('a').filter(function (a) { return /Cập nhật xét nghiệm chuyên khoa/.test(txt(a)); })[0];
     if (!upd) return;
+    var request = store.get('specialist_note_' + PKEY);
+    var banner = $('main > section:nth-of-type(2)');
+    if (request && banner) {
+      var detail = document.createElement('p');
+      detail.style.cssText = 'margin: 6px 0 0; font-size: 14px; color: #7A5300';
+      detail.textContent = 'Nội dung cần đánh giá: ' + request;
+      banner.appendChild(detail);
+    }
     upd.addEventListener('click', function (e) {
       e.preventDefault();
       modal({
@@ -508,6 +545,7 @@
       }).then(function (ok) {
         if (!ok) return;
         setWaiting(PKEY, false);
+        store.set('specialist_requested_' + PKEY, '0');
         flash('Hồ sơ ' + P.name + ' đã có kết quả. Mời bác sĩ ra kết luận.', 'info');
         go('KetLuan.html');
       });

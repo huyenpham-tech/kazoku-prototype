@@ -386,16 +386,8 @@
   /* ------------------------------------------------------------------ màn Bác sĩ */
   function doctorPage() {
     var next = $$('a').filter(function (a) { return /Tiếp: Chỉ định/.test(txt(a)); })[0];
-    var radios = $$('input[name="cs"]');
-    var yes = radios.filter(function (r) { return /^Có/.test(txt(r.closest('label'))); })[0];
-    var no = radios.filter(function (r) { return /^Không/.test(txt(r.closest('label'))); })[0];
-    if (!next || !yes || !no) return;
-    if (store.get('specialist_requested_' + PKEY) === '1' || isWaiting(PKEY)) {
-      yes.checked = true; no.checked = false;
-      paintPill(yes); paintPill(no);
-    }
+    if (!next) return;
     next.addEventListener('click', function () {
-      store.set('specialist_requested_' + PKEY, yes.checked ? '1' : '0');
       setWaiting(PKEY, false);
       store.set('doctor_' + PKEY, now());
     });

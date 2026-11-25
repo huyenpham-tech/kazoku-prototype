@@ -208,7 +208,7 @@
         sp.textContent = t.replace(/HS-\d+/, P.hs).replace(/\d{4}$/, P.hs.slice(3));
       }
     });
-    // Khối "Thông tin cơ bản" (tab Bác sĩ – Khám)
+    // Khối "Thông tin cơ bản" (tab Bác sĩ)
     var basics = { 'Họ và tên': P.name, 'Giới tính': P.sex, 'Tuổi': String(P.age), 'Ngày sinh': P.dob };
     $$('main span').forEach(function (sp) {
       var k = txt(sp), val = sp.nextElementSibling;
@@ -220,14 +220,14 @@
   function workflowChips() {
     var nav = $('nav[aria-label="Phần của phiếu"]');
     if (!nav) return;
-    var nurseDone = !!store.get('nurse_' + PKEY) || PKEY === 'an' || PKEY === 'binh';
+    var nurseDone = !!store.get('nurse_' + PKEY);
     var doctorDone = !!store.get('doctor_' + PKEY) || !!store.get('done_' + PKEY);
     var planDone = !!store.get('plan_' + PKEY) || !!store.get('done_' + PKEY);
     var states = {
       nurse: nurseDone ? 'Hoàn tất' : 'Chưa điền',
-      doctor: doctorDone ? 'Hoàn tất' : nurseDone ? 'Chờ' : 'Chưa điền',
-      plan: planDone ? 'Hoàn tất' : doctorDone || PKEY === 'an' ? 'Chờ' : 'Chưa điền',
-      conclusion: store.get('done_' + PKEY) ? 'Hoàn tất' : isWaiting(PKEY) || planDone ? 'Chờ' : 'Chưa điền'
+      doctor: doctorDone ? 'Hoàn tất' : 'Chưa điền',
+      plan: planDone ? 'Hoàn tất' : 'Chưa điền',
+      conclusion: store.get('done_' + PKEY) ? 'Hoàn tất' : isWaiting(PKEY) ? 'Chờ' : 'Chưa điền'
     };
     $$('a', nav).forEach(function (a) {
       var path = a.getAttribute('href').split('?')[0], stage;
@@ -369,6 +369,20 @@
 
   /* ------------------------------------------------------------------ màn Y tá (3 loại) */
   function nursePage() {
+    var noMeds = $('input[data-no-medication]');
+    var medicationFields = $('.kz-medication-fields');
+    if (noMeds && medicationFields) {
+      noMeds.checked = store.get('no_meds_' + PKEY) === '1';
+      function syncMedication() {
+        medicationFields.classList.toggle('kz-hidden', noMeds.checked);
+        $$('input, select, textarea, button', medicationFields).forEach(function (field) {
+          field.disabled = noMeds.checked;
+        });
+        store.set('no_meds_' + PKEY, noMeds.checked ? '1' : '0');
+      }
+      noMeds.addEventListener('change', syncMedication);
+      syncMedication();
+    }
     var send = $$('a').filter(function (a) { return /Hoàn tất & chuyển bác sĩ/.test(txt(a)); })[0];
     if (!send) return;
     send.addEventListener('click', function (e) {
@@ -397,7 +411,7 @@
     });
   }
 
-  /* ------------------------------------------------------------------ màn Bác sĩ – Khám */
+  /* ------------------------------------------------------------------ màn Bác sĩ */
   function doctorPage() {
     var next = $$('a').filter(function (a) { return /Tiếp: Chỉ định/.test(txt(a)); })[0];
     var radios = $$('input[name="cs"]');

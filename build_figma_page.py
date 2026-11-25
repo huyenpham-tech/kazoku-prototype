@@ -12,7 +12,7 @@ SCREENS = [
     ("03", "Y tá – Bán trú", "YTaBanTru.html", "binh"),
     ("04", "Y tá – Tại nhà", "YTaTaiNha.html", "phuc"),
     ("05", "Hồ sơ y tế", "HoSoYTe.html", "an"),
-    ("06", "Bác sĩ – Khám", "BacSi.html", "an"),
+    ("06", "Bác sĩ", "BacSi.html", "an"),
     ("07", "Chỉ định", "ChiDinh.html", "an"),
     ("08", "Kết luận", "KetLuan.html", "an"),
     ("09", "Kết luận – Chờ kết quả", "KetLuanCho.html", "binh"),

@@ -54,6 +54,8 @@ nav[aria-label="Phần của phiếu"] .kz-step-chip{display:inline-flex;align-i
 .kz-doc-actions button[aria-label="Xoá tệp"]{grid-column:2;justify-self:end}
 .kz-source-toggle{padding:2px 0;border:0;background:transparent;color:#0A524C;text-decoration:underline;cursor:pointer;font:600 14px Inter,system-ui,sans-serif}
 .kz-source-toggle:focus-visible,.kz-doc-actions button:focus-visible{outline:3px solid #7FC4BC;outline-offset:2px}
+.kz-no-medication{display:inline-flex;align-items:center;gap:8px;margin:8px 0 12px;font-size:14px;font-weight:500;cursor:pointer}
+.kz-no-medication input{width:18px;height:18px;accent-color:#0E6E66}
 .kz-split{display:flex;gap:16px;align-items:flex-start;width:100%;max-width:1920px;margin:auto}
 .kz-split>main{flex:1 1 50%;min-width:0;max-width:none !important;margin:0 !important}
 .kz-source-panel{box-sizing:border-box;flex:1 1 50%;min-width:0;height:calc(100vh - 24px);position:sticky;top:12px;margin:12px 16px 12px 0;border:1px solid #C9CFCB;border-radius:14px;background:white;overflow:hidden;display:flex;flex-direction:column}

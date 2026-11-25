@@ -147,11 +147,15 @@
       bd.addEventListener('click', function (e) {
         if (e.target === bd) return close(false);
         var b = e.target.closest('[data-r]');
-        if (b) close(b.getAttribute('data-r') === '1');
+        if (b) {
+          var confirmed = b.getAttribute('data-r') === '1';
+          if (confirmed && opts.onConfirm && opts.onConfirm(bd) === false) return;
+          close(confirmed);
+        }
       });
       document.addEventListener('keydown', onKey);
       document.body.appendChild(bd);
-      var first = $('[data-r="1"]', bd) || $('[data-r="0"]', bd);
+      var first = $('#kz-call', bd) || $('[data-r="1"]', bd) || $('[data-r="0"]', bd);
       if (first) first.focus();
     });
   }
@@ -696,7 +700,8 @@
       var row = b.closest('.rt');
       if (!row) return;
       var who = txt(row.children[1].firstElementChild);
-      var contact = txt(row.children[1].lastElementChild);
+      var recordId = txt(row.children[1].lastElementChild);
+      var contact = row.children[1].lastElementChild.getAttribute('data-contact') || recordId;
       var staff = txt(row.children[3]);
       var pill = row.children[4];
       if (txt(b) === 'Check-in') {
@@ -706,22 +711,35 @@
             '<p>Hồ sơ chuyển vào danh sách “Chờ đánh giá” của y tá phụ trách.</p>'
         }).then(function (ok) {
           if (!ok) return;
+          var previousStatus = txt(pill);
           pill.style.background = '#E3F2EF'; pill.style.color = '#0A524C';
           pill.innerHTML = '<span aria-hidden="true">●</span>Đã đến ' + now();
           var act = row.children[5];
           act.innerHTML = '<span style="font-size: 13px; color: #5B666A">Đã chuyển y tá · chờ đánh giá</span>';
-          bump('Đã đến', 1); bump('Chờ đến', -1);
+          bump('Đã đến', 1);
+          if (previousStatus.indexOf('Chờ đến') !== -1) bump('Chờ đến', -1);
+          if (previousStatus.indexOf('Muộn') !== -1 || previousStatus.indexOf('Chưa liên lạc được') !== -1) bump('Cần xử lý', -1);
           toast('Đã check-in ' + who + '. Đã báo ' + staff.split(' · ')[0] + '.', 'ok');
         });
       } else if (txt(b) === 'Liên hệ') {
+        var callResult = '';
         modal({
           title: 'Liên hệ gia đình · ' + who, icon: ICON.info, ok: 'Ghi nhận đã gọi', cancel: 'Đóng',
           html: '<dl><dt>Hồ sơ</dt><dd>' + esc(contact) + '</dd><dt>Trạng thái</dt><dd>' + esc(txt(pill)) + '</dd></dl>' +
             '<label style="display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:600">Kết quả cuộc gọi' +
-            '<select id="kz-call" style="height:44px;border:1px solid #C9CFCB;border-radius:8px;padding:0 10px;font-size:14px;background:#FFFFFF">' +
-            '<option>Đang trên đường đến</option><option>Không nghe máy</option><option>Xin dời lịch hẹn</option></select></label>'
+            '<input id="kz-call" type="text" required placeholder="Nhập kết quả cuộc gọi" style="height:44px;border:1px solid #C9CFCB;border-radius:8px;padding:0 10px;font-size:14px;background:#FFFFFF"></label>',
+          onConfirm: function (dialog) {
+            var input = $('#kz-call', dialog);
+            callResult = input.value.trim();
+            if (callResult) return true;
+            input.value = '';
+            input.reportValidity();
+            input.focus();
+            return false;
+          }
         }).then(function (ok) {
           if (!ok) return;
+          store.set('call_' + recordId, JSON.stringify({ result: callResult, at: now() }));
           toast('Đã ghi nhận cuộc gọi cho ' + who + ' lúc ' + now(), 'ok');
         });
       }
